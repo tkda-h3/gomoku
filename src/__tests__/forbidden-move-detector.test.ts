@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { ForbiddenMoveDetector } from "../game/forbidden-move-detector";
 import { Board, Cell } from "../game/board";
 
+// FIXME: 以下のテストケースは間違いなので修正する
 describe("ForbiddenMoveDetector", () => {
   describe("三三(Double Three)の判定", () => {
     it("三三が成立する場合はtrueを返す", () => {
