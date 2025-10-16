@@ -1,0 +1,33 @@
+{
+  "name": "gomoku",
+  "version": "1.0.0",
+  "description": "Gomoku (五目並べ) game with CLI interface",
+  "type": "module",
+  "main": "./dist/board.js",
+  "types": "./dist/board.d.ts",
+  "bin": {
+    "gomoku": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js",
+    "clean": "rm -rf dist",
+    "prebuild": "pnpm run clean"
+  },
+  "keywords": [
+    "gomoku",
+    "五目並べ",
+    "game",
+    "board-game",
+    "cli"
+  ],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.18.3",
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
