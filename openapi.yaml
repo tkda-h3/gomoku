@@ -1,0 +1,931 @@
+openapi: 3.0.3
+info:
+  title: Gomoku API
+  description: API for Gomoku (Five in a Row) game - calculates next move based on board state
+  version: 1.0.0
+  contact:
+    name: Gomoku API Support
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+  - url: https://api.gomoku.example.com
+    description: Production server
+
+paths:
+  /v1/next-move:
+    post:
+      summary: Calculate next move
+      description: |
+        Receives the current board state and the next player's color,
+        then returns the optimal next move position.
+      operationId: getNextMove
+      tags:
+        - Game
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NextMoveRequest"
+            examples:
+              earlyGame:
+                summary: Early game state
+                value:
+                  board:
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        "X",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                  nextColor: white
+              midGame:
+                summary: Mid game state
+                value:
+                  board:
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        "X",
+                        "O",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        "O",
+                        "X",
+                        "X",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        "O",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                    - [
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                        ".",
+                      ]
+                  nextColor: black
+      responses:
+        "200":
+          description: Successfully calculated next move
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NextMoveResponse"
+              examples:
+                validMove:
+                  summary: Valid next move response
+                  value:
+                    row: 7
+                    col: I
+        "400":
+          description: Invalid request (invalid board state, invalid color, etc.)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                invalidBoard:
+                  summary: Invalid board dimensions
+                  value:
+                    error: Invalid board dimensions
+                    message: Board must be 15x15
+                invalidColor:
+                  summary: Invalid color
+                  value:
+                    error: Invalid color
+                    message: nextColor must be either 'black' or 'white'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                serverError:
+                  summary: Server error
+                  value:
+                    error: Internal server error
+                    message: Failed to calculate next move
+
+components:
+  schemas:
+    NextMoveRequest:
+      type: object
+      required:
+        - board
+        - nextColor
+      properties:
+        board:
+          type: array
+          description: 15x15 board state, where each cell can be "." (empty), "X" (black), or "O" (white)
+          minItems: 15
+          maxItems: 15
+          items:
+            type: array
+            minItems: 15
+            maxItems: 15
+            items:
+              type: string
+              enum:
+                - "."
+                - X
+                - O
+          example:
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                "X",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+            - [
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+              ]
+        nextColor:
+          type: string
+          description: The color of the next player to move
+          enum:
+            - black
+            - white
+          example: white
+
+    NextMoveResponse:
+      type: object
+      required:
+        - row
+        - col
+      properties:
+        row:
+          type: integer
+          description: Row index (1-15) of the next move
+          minimum: 1
+          maximum: 15
+          example: 7
+        col:
+          type: string
+          description: Column letter (A-O) of the next move
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+            - F
+            - G
+            - H
+            - I
+            - J
+            - K
+            - L
+            - M
+            - N
+            - O
+          example: I
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error type
+          example: Invalid board dimensions
+        message:
+          type: string
+          description: Detailed error message
+          example: Board must be 15x15
+
+tags:
+  - name: Game
+    description: Game-related operations

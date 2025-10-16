@@ -5,6 +5,7 @@ A CLI tool built with TypeScript, designed with future React frontend support in
 ## Features
 
 - TypeScript-based CLI with Commander.js
+- OpenAPI-based API client generation
 - Volta for Node.js and pnpm version management
 - ESLint + Prettier for code quality
 - Vitest for testing
@@ -96,6 +97,30 @@ gomoku/
 ├── docker-compose.yml
 └── README.md
 ```
+
+## API Client Generation
+
+This project uses OpenAPI specification to generate TypeScript API client code.
+
+### Generate API Client
+
+```bash
+# Generate TypeScript client from OpenAPI spec
+make generate-client
+
+# Or using npx directly
+npx openapi-typescript-codegen --input ./openapi.yaml --output ./generated-client --client axios
+```
+
+The generated client will be placed in `./generated-client/` directory.
+
+### Clean Generated Files
+
+```bash
+make clean
+```
+
+**Note:** The generated client code is automatically excluded from git diffs (see `.gitattributes`) and ignored by git (see `.gitignore`).
 
 ## Scripts
 

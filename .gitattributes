@@ -1,0 +1,3 @@
+# Auto-generated files should not be shown in diffs
+generated-client/** linguist-generated=true
+generated-client/** -diff
