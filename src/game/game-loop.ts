@@ -1,11 +1,11 @@
-import { Cell } from "./board";
-import { Board } from "./board";
-import { BoardVisualizer } from "./board-visualizer";
-import { StateManager } from "./state-manager";
-import { CoordinateConverter } from "./coordinate-converter";
-import { ForbiddenMoveDetector } from "./forbidden-move-detector";
-import { GameStatusDetector } from "./game-status-detector";
-import { ApiClientWrapper } from "../api/api-client-wrapper";
+import { Cell } from "./board.js";
+import { Board } from "./board.js";
+import { BoardVisualizer } from "./board-visualizer.js";
+import { StateManager } from "./state-manager.js";
+import { CoordinateConverter } from "./coordinate-converter.js";
+import { ForbiddenMoveDetector } from "./forbidden-move-detector.js";
+import { GameStatusDetector } from "./game-status-detector.js";
+import { ApiClientWrapper } from "../api/api-client-wrapper.js";
 
 /**
  * ゲームループクラス

@@ -1,4 +1,4 @@
-import { Board, Cell } from "./board";
+import { Board, Cell } from "./board.js";
 
 /**
  * 方向を表すベクトル (row, col)

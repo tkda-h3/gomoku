@@ -1,4 +1,4 @@
-import { Cell } from "./board";
+import { Cell } from "./board.js";
 
 /**
  * ゲーム状態管理クラス

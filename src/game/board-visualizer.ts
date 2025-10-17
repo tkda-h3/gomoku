@@ -1,4 +1,4 @@
-import { Board, Cell } from "./board";
+import { Board, Cell } from "./board.js";
 
 /**
  * 盤面を視覚的に表示するクラス

@@ -1,4 +1,4 @@
-import { Board, Cell } from "./board";
+import { Board, Cell } from "./board.js";
 
 export type GameStatus = "BLACK_WIN" | "WHITE_WIN" | "DRAW" | "ONGOING";
 

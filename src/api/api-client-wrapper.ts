@@ -1,10 +1,10 @@
-import { Cell } from "../game/board";
+import { Cell } from "../game/board.js";
 import {
   GameService,
   NextMoveRequest,
   NextMoveResponse,
   OpenAPI,
-} from "../../generated-client";
+} from "../../generated-client/index.js";
 
 /**
  * APIクライアントラッパークラス
