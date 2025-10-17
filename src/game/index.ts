@@ -4,3 +4,4 @@ export { ForbiddenMoveDetector } from "./forbidden-move-detector";
 export { GameStatusDetector } from "./game-status-detector";
 export { CoordinateConverter } from "./coordinate-converter";
 export { StateManager } from "./state-manager";
+export { GameLoop } from "./game-loop";

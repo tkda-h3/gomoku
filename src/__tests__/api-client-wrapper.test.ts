@@ -34,7 +34,9 @@ describe("ApiClientWrapper", () => {
     describe("正常系", () => {
       test("黒の手番で正常なレスポンスを受け取る", async () => {
         const mockResponse = { row: 8, col: "H" };
-        vi.mocked(GameService.getNextMove).mockResolvedValue(mockResponse as any);
+        vi.mocked(GameService.getNextMove).mockResolvedValue(
+          mockResponse as any
+        );
 
         const result = await wrapper.getNextMove(
           mockBoard,
@@ -53,7 +55,9 @@ describe("ApiClientWrapper", () => {
 
       test("白の手番で正常なレスポンスを受け取る", async () => {
         const mockResponse = { row: 1, col: "A" };
-        vi.mocked(GameService.getNextMove).mockResolvedValue(mockResponse as any);
+        vi.mocked(GameService.getNextMove).mockResolvedValue(
+          mockResponse as any
+        );
 
         const result = await wrapper.getNextMove(
           mockBoard,
@@ -71,10 +75,10 @@ describe("ApiClientWrapper", () => {
 
       test("盤面の四隅の座標を正常に処理する", async () => {
         const testCases = [
-          { row: 1, col: "A" },    // 左上
-          { row: 1, col: "O" },    // 右上
-          { row: 15, col: "A" },   // 左下
-          { row: 15, col: "O" },   // 右下
+          { row: 1, col: "A" }, // 左上
+          { row: 1, col: "O" }, // 右上
+          { row: 15, col: "A" }, // 左下
+          { row: 15, col: "O" }, // 右下
         ];
 
         for (const testCase of testCases) {
@@ -93,7 +97,9 @@ describe("ApiClientWrapper", () => {
 
       test("エンドポイントURLが正しく設定される", async () => {
         const mockResponse = { row: 8, col: "H" };
-        vi.mocked(GameService.getNextMove).mockResolvedValue(mockResponse as any);
+        vi.mocked(GameService.getNextMove).mockResolvedValue(
+          mockResponse as any
+        );
 
         const endpoints = [
           "http://localhost:3000",
@@ -171,7 +177,9 @@ describe("ApiClientWrapper", () => {
       });
 
       test("rowフィールドが欠損している場合エラー", async () => {
-        vi.mocked(GameService.getNextMove).mockResolvedValue({ col: "H" } as any);
+        vi.mocked(GameService.getNextMove).mockResolvedValue({
+          col: "H",
+        } as any);
 
         await expect(
           wrapper.getNextMove(
@@ -373,9 +381,7 @@ describe("ApiClientWrapper", () => {
       });
 
       test("Errorオブジェクト以外のエラーも処理される", async () => {
-        vi.mocked(GameService.getNextMove).mockRejectedValue(
-          "String error"
-        );
+        vi.mocked(GameService.getNextMove).mockRejectedValue("String error");
 
         await expect(
           wrapper.getNextMove(
